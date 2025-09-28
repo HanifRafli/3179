@@ -1,0 +1,57 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 450,
+  "title": "Air Quality in Malaysia (2023)",
+  "projection": {"type": "mercator"},
+  "layer": [
+    {
+      "data": {
+        "url": "ne_110m_my.json",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+      },
+      "mark": {"type": "geoshape", "fill": "beige", "stroke": "black"}
+    },
+    {
+        "data": {
+        "url": "ne_110m_my.json",
+        "format": {"type": "topojson", "feature": "ne_110m_ocean"}
+      },
+      "mark": {"type": "geoshape", "fill": "lightblue", "stroke": "white"}
+        
+    },
+    {
+      "data": {
+        "url": "malaysia_aqi.csv"
+      },
+      "mark": {"type": "circle", "size": 300,"stroke":"white", "fillOpacity": 0.8},
+      "encoding": {
+        "longitude": {"field": "lng", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
+        "color": {
+          "field": "AQI Category",
+          "type": "ordinal",
+          "legend":{"title":"Air Quality Index Category"},
+          "scale": {"range": ["#fff5f0", "#fcbba1", "#fc9272", "#de2d26", "#a50f15"]}
+        },
+        "tooltip": [
+          {"field": "City", "type": "nominal"},
+          {"field": "AQI Value", "type": "quantitative"},
+          {"field": "AQI Category", "type": "nominal"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "ne_110m_my.json",
+        "format": {"type": "topojson", "feature": "ne_110m_graticules_1"}
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "dimgrey",
+        "strokeWidth": 0.5
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+Country,City,AQI Value,AQI Category,CO AQI Value,CO AQI Category,Ozone AQI Value,Ozone AQI Category,NO2 AQI Value,NO2 AQI Category,PM2.5 AQI Value,PM2.5 AQI Category,lat,lng
+Malaysia,Batu Gajah,92,Moderate,2,Good,57,Moderate,1,Good,92,Moderate,4.4667,101.05
+Malaysia,Lahad Datu,48,Good,1,Good,15,Good,0,Good,48,Good,5.03,118.34
+Malaysia,Kangar,105,Unhealthy for Sensitive Groups,2,Good,13,Good,8,Good,105,Unhealthy for Sensitive Groups,6.4333,100.2
+Malaysia,Melaka,61,Moderate,1,Good,31,Good,0,Good,61,Moderate,2.1944,102.2486
+Malaysia,Kluang,80,Moderate,1,Good,38,Good,0,Good,80,Moderate,2.0336,103.3194
+Malaysia,Kuala Lumpur,76,Moderate,2,Good,41,Good,2,Good,76,Moderate,3.1478,101.6953
+Malaysia,Kuala Lipis,70,Moderate,2,Good,10,Good,3,Good,70,Moderate,4.18,102.05
+Malaysia,Cukai,93,Moderate,1,Good,38,Good,0,Good,93,Moderate,4.2332,103.4479
+Malaysia,Parit Buntar,79,Moderate,2,Good,60,Moderate,0,Good,79,Moderate,5.1167,100.5
+Malaysia,Kuala Terengganu,75,Moderate,1,Good,40,Good,0,Good,75,Moderate,5.3292,103.1361
+Malaysia,Ipoh,69,Moderate,1,Good,38,Good,0,Good,69,Moderate,4.7,101.3
+Malaysia,Shah Alam,78,Moderate,2,Good,43,Good,2,Good,78,Moderate,3.3722,101.3167
+Malaysia,Bukit Mertajam,150,Unhealthy,3,Good,24,Good,10,Good,150,Unhealthy,5.3631,100.4667
+Malaysia,Seremban,140,Unhealthy for Sensitive Groups,3,Good,14,Good,12,Good,140,Unhealthy for Sensitive Groups,2.7222,101.9417
+Malaysia,Miri,209,Very Unhealthy,67,Moderate,209,Very Unhealthy,2,Good,157,Unhealthy,4.3925,113.9861
+Malaysia,Raub,74,Moderate,1,Good,35,Good,0,Good,74,Moderate,3.7931,101.8569
+Malaysia,Klang,57,Moderate,1,Good,34,Good,1,Good,57,Moderate,2.9,101.45
+Malaysia,Sungai Petani,150,Unhealthy,3,Good,23,Good,10,Good,150,Unhealthy,5.65,100.48
+Malaysia,Petaling Jaya,97,Moderate,2,Good,48,Good,1,Good,97,Moderate,3.0972,102.1
+Malaysia,Kuantan,86,Moderate,1,Good,38,Good,0,Good,86,Moderate,3.8167,103.3333
+Malaysia,Alor Setar,55,Moderate,1,Good,35,Good,0,Good,55,Moderate,6.1183,100.3694
+Malaysia,Kuah,104,Unhealthy for Sensitive Groups,2,Good,58,Moderate,0,Good,104,Unhealthy for Sensitive Groups,6.3167,99.85
+Malaysia,Bintulu,51,Moderate,1,Good,12,Good,0,Good,51,Moderate,3.17,113.03
+Malaysia,Pasir Gudang,141,Unhealthy for Sensitive Groups,2,Good,4,Good,21,Good,141,Unhealthy for Sensitive Groups,1.5028,104.3
+Malaysia,Johor Bahru,107,Unhealthy for Sensitive Groups,1,Good,35,Good,3,Good,107,Unhealthy for Sensitive Groups,1.4556,103.7611
+Malaysia,Sibu,61,Moderate,3,Good,21,Good,0,Good,61,Moderate,2.3,111.8167
+Malaysia,Kuching,46,Good,1,Good,16,Good,0,Good,46,Good,1.5575,110.3439
+Malaysia,Taiping,131,Unhealthy for Sensitive Groups,3,Good,24,Good,10,Good,131,Unhealthy for Sensitive Groups,4.85,100.7333
+Malaysia,Teluk Intan,90,Moderate,2,Good,57,Moderate,1,Good,90,Moderate,4.0259,101.0213
