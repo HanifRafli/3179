@@ -1,4 +1,4 @@
-Country,City,AQI Value,AQI Category,CO AQI Value,CO AQI Category,Ozone AQI Value,Ozone AQI Category,NO2 AQI Value,NO2 AQI Category,PM2.5 AQI Value,PM2.5 AQI Category,lat,lng
+Country,City,AQI Level,AQI Category,CO AQI Content (microgram per cubic meter),CO AQI Category,Ozone AQI Value,Ozone AQI Category,NO2 AQI Value,NO2 AQI Category,PM2.5 AQI Content (microgram per cubic meter),PM2.5 AQI Category,lat,lng
 Malaysia,Batu Gajah,92,Moderate,2,Good,57,Moderate,1,Good,92,Moderate,4.4667,101.05
 Malaysia,Lahad Datu,48,Good,1,Good,15,Good,0,Good,48,Good,5.03,118.34
 Malaysia,Kangar,105,Unhealthy for Sensitive Groups,2,Good,13,Good,8,Good,105,Unhealthy for Sensitive Groups,6.4333,100.2

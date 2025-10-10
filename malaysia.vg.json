@@ -4,41 +4,117 @@
   "height": 450,
   "title": "Air Quality in Malaysia (2023)",
   "projection": {"type": "mercator"},
+  "params": [
+    {
+      "name": "AQI_selection",
+      "value": "All",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All",
+          "Good",
+          "Moderate",
+          "Unhealthy for Sensitive Groups",
+          "Unhealthy",
+          "Very Unhealthy"
+        ],
+        "labels": [
+          "All",
+          "Good",
+          "Moderate",
+          "Unhealthy (Sensitive Groups)",
+          "Unhealthy",
+          "Very Unhealthy"
+        ],
+        "name": "Filter by AQI Category: "
+      }
+    }
+  ],
   "layer": [
     {
       "data": {
         "url": "ne_110m_my.json",
         "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
       },
-      "mark": {"type": "geoshape", "fill": "beige", "stroke": "black"}
+      "mark": {"type": "geoshape", "fill": "#C2B280", "stroke": "black"}
     },
     {
-        "data": {
+      "data": {
         "url": "ne_110m_my.json",
         "format": {"type": "topojson", "feature": "ne_110m_ocean"}
       },
       "mark": {"type": "geoshape", "fill": "lightblue", "stroke": "white"}
-        
     },
     {
-      "data": {
-        "url": "malaysia_aqi.csv"
-      },
-      "mark": {"type": "circle", "size": 300,"stroke":"white", "fillOpacity": 0.8},
+      "data": {"url": "malaysia_aqi.csv"},
+      "transform": [
+        {
+          "filter": "AQI_selection == 'All' || datum['AQI Category'] == AQI_selection"
+        }
+      ],
+      "mark": {"type": "circle", "size": 300, "stroke": "white", "fillOpacity": 0.8},
       "encoding": {
         "longitude": {"field": "lng", "type": "quantitative"},
         "latitude": {"field": "lat", "type": "quantitative"},
         "color": {
           "field": "AQI Category",
           "type": "ordinal",
-          "legend":{"title":"Air Quality Index Category"},
-          "scale": {"range": ["#fff5f0", "#fcbba1", "#fc9272", "#de2d26", "#a50f15"]}
+          "legend": {"title": "Air Quality Index Category"},
+          "scale": {
+            "domain": [
+              "Good",
+              "Moderate",
+              "Unhealthy for Sensitive Groups",
+              "Unhealthy",
+              "Very Unhealthy",
+              "Hazardous"
+            ],
+            "range": ["#fff5f0", "#fcbba1", "#fc9272", "#de2d26", "#a50f15", "#67000d"]
+          }
         },
         "tooltip": [
           {"field": "City", "type": "nominal"},
-          {"field": "AQI Value", "type": "quantitative"},
-          {"field": "AQI Category", "type": "nominal"}
+          {"field": "AQI Category", "type": "nominal"},
+          {
+            "field": "PM2\\.5 AQI Content (microgram per cubic meter)",
+            "type": "quantitative"
+          },
+          {
+            "field": "CO AQI Content (microgram per cubic meter)",
+            "type": "quantitative"
+          }
         ]
+      }
+    },
+    {
+      "data": {"url": "malaysia_aqi.csv"},
+      "transform": [
+        {
+          "filter": "AQI_selection == 'All' || datum['AQI Category'] == AQI_selection"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 10,
+        "dy": 0,
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "longitude": {"field": "lng", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
+        "text": {"field": "City", "type": "nominal"},
+        "color": {"value": "black"},
+        "opacity": {
+          "condition": {
+            "test": "datum['City'] == 'Lahad Datu' || datum['City'] == 'Kuching' || datum['City'] == 'Miri' || datum['City'] == 'Pasir Gudang'|| datum['City'] == 'Seremban' || datum['City'] == 'Sungai Petani'",
+            "value": 1
+          },
+          "value": 0
+        }
       }
     },
     {
@@ -53,5 +129,14 @@
         "strokeWidth": 0.5
       }
     }
-  ]
+  ],
+  "config": {
+    "style": {
+      "tooltip": {
+        "font": "Arial",
+        "fontSize": 100,
+        "fontWeight": "bold"
+      }
+    }
+  }
 }
