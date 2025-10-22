@@ -1,0 +1,77 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Pollutant Levels by State and Average Dew Point Over Time (2005–2024)",
+  "width": 800,
+  "height": 450,
+  "data": {"url": "yearly.csv"},
+  "params": [
+    {
+      "name": "state_selection",
+      "value": "All",
+      "bind": {
+        "input": "select",
+        "options": ["All", "Sabah", "Sarawak", "Terengganu"],
+        "labels": ["All States", "Sabah", "Sarawak", "Terengganu"],
+        "name": "Filter by State: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "state_selection == 'All' || datum.state == state_selection"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "bar", "opacity": 0.8},
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": "Year"
+        },
+        "y": {
+          "aggregate": "sum",
+          "field": "pollutant_value",
+          "type": "quantitative",
+          "title": "Total Pollutant Value (AQI)"
+        },
+        "color": {
+          "field": "state",
+          "type": "nominal",
+          "title": "State"
+        },
+        "tooltip": [
+          {"field": "year", "type": "ordinal"},
+          {"field": "state", "type": "nominal"},
+          {"aggregate": "sum", "field": "pollutant_value", "title": "Total Pollutant (AQI)"},
+          {"aggregate": "mean", "field": "dew_point", "title": "Average Dew Point (°C)"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "line", "color": "black", "strokeWidth": 2, "point": true},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {
+          "aggregate": "mean",
+          "field": "dew_point",
+          "type": "quantitative",
+          "title": "Average Dew Point (°C)",
+          "axis": {"orient": "right"}
+        },
+        "tooltip": [
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"aggregate": "mean", "field": "dew_point", "type": "quantitative", "title": "Average Dew Point (°C)"}
+        ]
+      }
+    }
+  ],
+  "resolve": {
+    "scale": {"y": "independent"}
+  },
+  "config": {
+    "axis": {"labelFontSize": 12, "titleFontSize": 14},
+    "legend": {"titleFontSize": 13, "labelFontSize": 12, "orient": "right"}
+  }
+}

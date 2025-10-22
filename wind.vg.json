@@ -1,0 +1,60 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Relationship Between Wind Speed and Air Pollution Over Time (Malaysia)",
+  "width": 800,
+  "height": 450,
+  "data": {"url": "monthly.csv"},
+  "transform": [
+    {
+      "aggregate": [
+        {"op": "mean", "field": "wind_speed", "as": "Average Wind Speed"},
+        {"op": "mean", "field": "pollutant_value", "as": "Average Pollutant Value"}
+      ],
+      "groupby": ["year"]
+    },
+    {
+      "fold": ["Average Wind Speed", "Average Pollutant Value"],
+      "as": ["Variable", "Value"]
+    }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "line", "strokeWidth": 2, "point": true},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal", "title": "Year"},
+        "y": {
+          "field": "Value",
+          "type": "quantitative",
+          "title": "Measurement Value"
+        },
+        "color": {
+          "field": "Variable",
+          "type": "nominal",
+          "title": "Measurement",
+          "scale": {
+            "domain": ["Average Wind Speed", "Average Pollutant Value"],
+            "range": ["#1f77b4", "#e45756"]
+          },
+          "legend": {"title": "Measurement"}
+        },
+        "strokeDash": {
+          "field": "Variable",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Average Wind Speed", "Average Pollutant Value"],
+            "range": [[], [4, 2]]
+          }
+        },
+        "tooltip": [
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"field": "Value", "type": "quantitative", "title": "Average"}
+        ]
+      }
+    }
+  ],
+  "resolve": {"scale": {"y": "independent"}},
+  "config": {
+    "axis": {"labelFontSize": 12, "titleFontSize": 14},
+    "legend": {"titleFontSize": 13, "labelFontSize": 12}
+  }
+}

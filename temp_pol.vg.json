@@ -1,0 +1,76 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Relationship Between Temperature and Pollutant Levels in Malaysia (2005 - 2024)",
+  "width": 700,
+  "height": 450,
+  "data": {
+    "url": "yearly.csv"
+  },
+  "params": [
+    {
+      "name": "state_selection",
+      "value": "All",
+      "bind": {
+        "input": "select",
+        "options": ["All", "Sabah", "Sarawak", "Terengganu"],
+        "labels": ["All States", "Sabah", "Sarawak", "Terengganu"],
+        "name": "Filter by State: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "state_selection == 'All' || datum.state == state_selection"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "circle",
+        "opacity": 0.8,
+        "size": 80
+      },
+      "encoding": {
+        "y": {
+          "field": "temperature",
+          "type": "quantitative",
+          "title": "Average Temperature (°C)"
+        },
+        "x": {
+          "field": "pollutant_value",
+          "type": "quantitative",
+          "title": "Average Pollutant Value (AQI)"
+        },
+        "color": {
+          "field": "state",
+          "type": "nominal",
+          "title": "State"
+        },
+        "tooltip": [
+          {"field": "state", "type": "nominal", "title": "State"},
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"field": "temperature", "type": "quantitative", "title": "Temperature (°C)"},
+          {"field": "pollutant_value", "type": "quantitative", "title": "Pollutant Value"}
+        ]
+      }
+    },
+    {
+      "transform": [
+        {"regression": "temperature", "on": "pollutant_value"}
+      ],
+      "mark": {
+        "type": "line",
+        "color": "black",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {"field": "pollutant_value", "type": "quantitative"},
+        "y": {"field": "temperature", "type": "quantitative"}
+      }
+    }
+  ],
+  "config": {
+    "axis": {"labelFontSize": 12, "titleFontSize": 14},
+    "legend": {"titleFontSize": 13, "labelFontSize": 12, "orient": "right"}
+  }
+}

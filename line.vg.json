@@ -1,0 +1,35 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Average Temperature Over Time by State (Malaysia)",
+  "width": 800,
+  "height": 450,
+  "data": {
+    "url": "yearly.csv"
+  },
+  "mark": {
+    "type": "line",
+    "point": true
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "temporal",
+      "title": "Year"
+    },
+    "y": {
+      "field": "temperature",
+      "type": "quantitative",
+      "title": "Average Temperature (°C)"
+    },
+    "color": {
+      "field": "state",
+      "type": "nominal",
+      "title": "State"
+    },
+    "tooltip": [
+      {"field": "state", "type": "nominal", "title": "State"},
+      {"field": "year", "type": "temporal", "title": "Year"},
+      {"field": "temperature", "type": "quantitative", "title": "Temperature (°C)"}
+    ]
+  }
+}

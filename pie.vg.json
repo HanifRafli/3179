@@ -1,0 +1,76 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Percentage of Pollutant Levels by State (Malaysia, Monthly Average)",
+  "width": 400,
+  "height": 400,
+  "data": {
+    "url": "monthly.csv"
+  },
+  "transform": [
+    {
+      "aggregate": [{"op": "mean", "field": "pollutant_value", "as": "avg_pollutant"}],
+      "groupby": ["state"]
+    },
+    {
+      "joinaggregate": [{"op": "sum", "field": "avg_pollutant", "as": "total_pollutant"}]
+    },
+    {
+      "calculate": "datum.avg_pollutant / datum.total_pollutant",
+      "as": "percent_pollutant"
+    },
+    {
+      "window": [{"op": "sum", "field": "percent_pollutant", "as": "endAngle"}],
+      "sort": [{"field": "state"}]
+    },
+    {
+      "calculate": "datum.endAngle - datum.percent_pollutant / 2",
+      "as": "midAngle"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "arc", "outerRadius": 150},
+      "encoding": {
+        "theta": {"field": "percent_pollutant", "type": "quantitative"},
+        "color": {"field": "state", "type": "nominal"},
+        "tooltip": [
+          {"field": "state", "type": "nominal", "title": "State"},
+          {"field": "avg_pollutant", "type": "quantitative", "title": "Average Pollutant (AQI)", "format": ".2f"},
+          {"field": "percent_pollutant", "type": "quantitative", "title": "Percentage", "format": ".1%"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "radius": 100,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "align": "center"
+      },
+      "encoding": {
+        "theta": {"field": "midAngle", "type": "quantitative"},
+        "text": {"field": "state", "type": "nominal"},
+        "color": {"value": "white"}
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "radius": 70,
+        "fontSize": 11,
+        "fill": "white",
+        "align": "center"
+      },
+      "encoding": {
+        "theta": {"field": "midAngle", "type": "quantitative"},
+        "text": {"field": "percent_pollutant", "type": "quantitative", "format": ".0%"}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "legend": {"disable": true},
+    "arc": {"stroke": "#fff", "strokeWidth": 1}
+  }
+}

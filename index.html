@@ -1,23 +1,232 @@
+<!-- stylization done by the majority assistance from ChatGPT with the prompt: -->
+<!-- system prompt: add style and refine the current copywriting of [original html code]-->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pollutants in Malaysia’s Air</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+  <!-- Vega-Lite dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
 
-    <script src="malaysia.js"></script>
+  <!-- Visualization scripts -->
+  <script src="malaysia.js"></script>
 
-    <h1>Muhammad Hanif Rafli - 32625421 </h1>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      background-color: #f9fafc;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #e8eef5;
+      text-align: center;
+      padding: 40px 20px 30px 20px;
+      border-bottom: 3px solid #c7d5eb;
+    }
+
+    header h1 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 2.4rem;
+      margin: 0;
+      color: #1e2a38;
+    }
+
+    .byline {
+  font-size: 0.95rem;
+  color: #555;
+  font-style: italic;
+  margin-top: 8px;
+  display: block;
+  width: 100%;
+  text-align: center;     /* ensures text is centered horizontally */
+  margin-left: auto;      /* centers if width shrinks */
+  margin-right: auto;
+}
+
+
+    main {
+      padding: 40px 80px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    section {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    section h2 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: #2a2a2a;
+      margin-top: 0;
+    }
+
+    section h3 {
+      font-size: 1.3rem;
+      color: #444;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      max-width: 850px;
+    }
+
+    .chart-column {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #malaysia_map, #wind_pol, #pie_pol, #dew_pol {
+      margin-top: 25px;
+    }
+
+    footer {
+      text-align: center;
+      color: #555;
+      padding: 30px 20px;
+      font-size: 0.9rem;
+    }
+
+    .conclusion-box {
+      background: #ffffff;
+      border: 1px solid #ddd;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .conclusion-box h2 {
+      color: #1e2a38;
+      margin-top: 0;
+      font-size: 1.5rem;
+      font-family: "Playfair Display", Georgia, serif;
+    }
+
+    @media (max-width: 768px) {
+      main {
+        padding: 20px;
+      }
+      .chart-column {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <div id="malaysia">
-    </div>
-</body>
+  <header>
+  <h1>Pollutants in Malaysia’s Air</h1>
+  <p class="byline">A visualization by <strong>Muhammad Hanif Rafli</strong> — 32625421</p>
+</header>
 
+
+  <main>
+    <!-- Section 1: Introduction -->
+    <section>
+      <h2>Understanding AQI</h2>
+      <p>
+        The <strong>Air Quality Index (AQI)</strong> is a standardized measure that converts concentrations of common pollutants 
+        into a single indicator ranging from <strong>0 (Good)</strong> to <strong>500 (Hazardous)</strong>. 
+        A higher value signifies poorer air quality and increased health risks.
+      </p>
+
+      <div id="malaysia_map"></div>
+      <p style="text-align:center; font-style: italic;">Hover over each city to view detailed AQI data.</p>
+    </section>
+
+    <!-- Section 2: Regional focus -->
+    <section>
+      <h2>Regional Focus: Sabah, Sarawak, and Terengganu</h2>
+      <p>
+        We take a closer look at <strong>Sabah</strong>, <strong>Sarawak</strong>, and <strong>Terengganu</strong> 
+        to understand their air quality patterns. While Terengganu lies on the West Coast, 
+        Sabah and Sarawak are in East Malaysia (Borneo). Despite limited data coverage, 
+        these regions provide a strong representation of Malaysia’s environmental dynamics.
+      </p>
+    </section>
+
+    <!-- Section 3: Temperature and Humidity -->
+    <section>
+      <h2>Weather and Pollutants</h2>
+      <h3>Temperature and Humidity</h3>
+      <p>
+        Pollutant levels tend to increase with rising <strong>temperature</strong>. Conversely, lower <strong>humidity</strong> levels often correspond to reduced pollution. 
+        However, <strong>temperature</strong> appears to have a stronger effect on AQI, likely due to enhanced chemical reactions in warmer air.
+      </p>
+
+      <div class="chart-column">
+        <div id="temp_pol"></div>
+        <div id="humid_pol"></div>
+      </div>
+    </section>
+
+    <!-- Section 4: Wind -->
+    <section>
+      <h3>Wind and Pollution</h3>
+      <p>
+        When <strong>wind speed</strong> increases, pollutant levels often rise too. 
+        This suggests that strong winds may transport pollutants from other regions (a <em>transport effect</em>), 
+        while calmer air allows pollutants to settle and disperse locally.
+      </p>
+      <div id="wind_pol"></div>
+    </section>
+
+    <!-- Section 5: Pollutant Distribution -->
+    <section>
+      <h3>Pollutant Distribution</h3>
+      <p>
+        Pollutants are relatively evenly distributed across Malaysia’s East Coast and Borneo regions. 
+        This pattern suggests that large-scale atmospheric circulation and shared climatic influences 
+        play significant roles in spreading airborne particles and gases across the nation.
+      </p>
+      <div id="pie_pol"></div>
+    </section>
+
+    <!-- Section 6: Dew Point -->
+    <section>
+      <h3>Dew Point and Pollutant Concentration</h3>
+      <p>
+        A higher <strong>dew point</strong> means more moisture in the air — which can trap pollutants 
+        or help remove them through condensation. Even small annual changes in <strong>dew point</strong> 
+        seem to correspond with noticeable shifts in <strong>pollutant levels</strong>.
+      </p>
+      <div id="dew_pol"></div>
+    </section>
+
+    <!-- Section 7: Conclusion -->
+    <section class="conclusion-box">
+      <h2>Conclusion</h2>
+      <p>
+        Weather conditions significantly shape Malaysia’s air quality.  
+        High <strong>temperature</strong> amplifies chemical reactions that form pollutants,  
+        while <strong>humidity</strong> and <strong>dew point</strong> affect how long they stay suspended.  
+        <strong>Wind</strong> can both spread and dilute pollutants depending on its speed and direction.  
+        Overall, the data shows that <strong>temperature</strong> and <strong>wind speed</strong> have the most consistent impact on AQI variation across the years,  
+        underscoring the need for continuous monitoring and adaptive environmental management to maintain cleaner air.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 | Air Quality Analysis — Malaysia | Data sourced from national AQI and weather archives.
+  </footer>
+</body>
 </html>

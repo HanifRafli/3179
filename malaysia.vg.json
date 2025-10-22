@@ -4,6 +4,7 @@
   "height": 450,
   "title": "Air Quality in Malaysia (2023)",
   "projection": {"type": "mercator"},
+
   "params": [
     {
       "name": "AQI_selection",
@@ -34,16 +35,16 @@
     {
       "data": {
         "url": "ne_110m_my.json",
-        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+        "format": {"type": "topojson", "feature": "ne_110m_ocean"}
       },
-      "mark": {"type": "geoshape", "fill": "#C2B280", "stroke": "black"}
+      "mark": {"type": "geoshape", "fill": "lightblue", "stroke": "white"}
     },
     {
       "data": {
         "url": "ne_110m_my.json",
-        "format": {"type": "topojson", "feature": "ne_110m_ocean"}
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
       },
-      "mark": {"type": "geoshape", "fill": "lightblue", "stroke": "white"}
+      "mark": {"type": "geoshape", "fill": "#f0e6cc", "stroke": "gray"}
     },
     {
       "data": {"url": "malaysia_aqi.csv"},
@@ -52,10 +53,16 @@
           "filter": "AQI_selection == 'All' || datum['AQI Category'] == AQI_selection"
         }
       ],
-      "mark": {"type": "circle", "size": 300, "stroke": "white", "fillOpacity": 0.8},
+      "mark": {"type": "circle", "stroke": "white", "fillOpacity": 0.8},
       "encoding": {
         "longitude": {"field": "lng", "type": "quantitative"},
         "latitude": {"field": "lat", "type": "quantitative"},
+        "size": {
+          "field": "AQI Level",
+          "type": "quantitative",
+          "scale": {"range": [50, 800]},
+          "title": "AQI Level"
+        },
         "color": {
           "field": "AQI Category",
           "type": "ordinal",
@@ -69,20 +76,15 @@
               "Very Unhealthy",
               "Hazardous"
             ],
-            "range": ["#fff5f0", "#fcbba1", "#fc9272", "#de2d26", "#a50f15", "#67000d"]
+            "range": ["#c7e9b4", "#fdae61", "#f46d43", "#d73027", "#a50026", "#67000d"]
           }
         },
         "tooltip": [
           {"field": "City", "type": "nominal"},
           {"field": "AQI Category", "type": "nominal"},
-          {
-            "field": "PM2\\.5 AQI Content (microgram per cubic meter)",
-            "type": "quantitative"
-          },
-          {
-            "field": "CO AQI Content (microgram per cubic meter)",
-            "type": "quantitative"
-          }
+          {"field": "AQI Level", "type": "quantitative"},
+          {"field": "PM2\\.5 AQI Content (microgram per cubic meter)", "type": "quantitative"},
+          {"field": "CO AQI Content (microgram per cubic meter)", "type": "quantitative"}
         ]
       }
     },
@@ -98,10 +100,11 @@
         "align": "left",
         "baseline": "middle",
         "dx": 10,
-        "dy": 0,
-        "fontSize": 12,
-        "fontStyle": "italic",
-        "fontWeight": "bold"
+        "dy": -5,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "stroke": "black",
+        "strokeWidth": 0
       },
       "encoding": {
         "longitude": {"field": "lng", "type": "quantitative"},
@@ -110,7 +113,7 @@
         "color": {"value": "black"},
         "opacity": {
           "condition": {
-            "test": "datum['City'] == 'Lahad Datu' || datum['City'] == 'Kuching' || datum['City'] == 'Miri' || datum['City'] == 'Pasir Gudang'|| datum['City'] == 'Seremban' || datum['City'] == 'Sungai Petani'",
+            "test": "datum['City'] == 'Kuala Terengganu' || datum['City'] == 'Kuching' || datum['City'] == 'Miri' || datum['City'] == 'Pasir Gudang'|| datum['City'] == 'Seremban' || datum['City'] == 'Sungai Petani' || datum['City'] == 'Lahad Datu'",
             "value": 1
           },
           "value": 0
@@ -125,8 +128,9 @@
       "mark": {
         "type": "geoshape",
         "fill": null,
-        "stroke": "dimgrey",
-        "strokeWidth": 0.5
+        "stroke": "black",
+        "strokeWidth": 0.4,
+        "opacity": 0.6
       }
     }
   ],
@@ -134,8 +138,8 @@
     "style": {
       "tooltip": {
         "font": "Arial",
-        "fontSize": 100,
-        "fontWeight": "bold"
+        "fontSize": 13,
+        "fontWeight": "normal"
       }
     }
   }
