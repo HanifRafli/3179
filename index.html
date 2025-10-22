@@ -18,7 +18,7 @@
 
   <style>
     body {
-      font-family: "Segoe UI", Arial, sans-serif;
+      font-family: "Merriweather", Georgia, serif;
       margin: 0;
       background-color: #f9fafc;
       color: #333;
@@ -26,15 +26,16 @@
     }
 
     header {
-      background-color: #e8eef5;
-      text-align: center;
-      padding: 40px 20px 30px 20px;
-      border-bottom: 3px solid #c7d5eb;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 
     header h1 {
-      font-family: "Playfair Display", Georgia, serif;
+      font-family: "Poppins", "Segoe UI", sans-serif;
       font-size: 2.4rem;
+      font-weight: 700;
       margin: 0;
       color: #1e2a38;
     }
@@ -44,11 +45,9 @@
   color: #555;
   font-style: italic;
   margin-top: 8px;
-  display: block;
-  width: 100%;
-  text-align: center;     /* ensures text is centered horizontally */
-  margin-left: auto;      /* centers if width shrinks */
-  margin-right: auto;
+  text-align: center;   /* centers the text horizontally */
+  display: block;       /* ensures it behaves as a full-width block */
+  width: 100%;          /* allows it to center properly */
 }
 
 
@@ -66,18 +65,21 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
-    section h2 {
-      font-family: "Playfair Display", Georgia, serif;
+    section h2, section h3 {
+      font-family: "Poppins", "Segoe UI", sans-serif;
       font-weight: 700;
-      font-size: 1.6rem;
       color: #2a2a2a;
       margin-top: 0;
     }
 
+    section h2 {
+      font-size: 1.7rem;
+    }
+
     section h3 {
       font-size: 1.3rem;
+      margin-bottom: 10px;
       color: #444;
-      margin-bottom: 8px;
     }
 
     p {
@@ -103,6 +105,8 @@
       color: #555;
       padding: 30px 20px;
       font-size: 0.9rem;
+      border-top: 1px solid #ddd;
+      background-color: #f4f6f8;
     }
 
     .conclusion-box {
@@ -117,7 +121,7 @@
       color: #1e2a38;
       margin-top: 0;
       font-size: 1.5rem;
-      font-family: "Playfair Display", Georgia, serif;
+      font-family: "Poppins", "Segoe UI", sans-serif;
     }
 
     @media (max-width: 768px) {
@@ -132,14 +136,13 @@
 </head>
 
 <body>
-  <header>
+<header>
   <h1>Pollutants in Malaysia’s Air</h1>
   <p class="byline">A visualization by <strong>Muhammad Hanif Rafli</strong> — 32625421</p>
 </header>
 
 
   <main>
-    <!-- Section 1: Introduction -->
     <section>
       <h2>Understanding AQI</h2>
       <p>
@@ -147,12 +150,10 @@
         into a single indicator ranging from <strong>0 (Good)</strong> to <strong>500 (Hazardous)</strong>. 
         A higher value signifies poorer air quality and increased health risks.
       </p>
-
       <div id="malaysia_map"></div>
       <p style="text-align:center; font-style: italic;">Hover over each city to view detailed AQI data.</p>
     </section>
 
-    <!-- Section 2: Regional focus -->
     <section>
       <h2>Regional Focus: Sabah, Sarawak, and Terengganu</h2>
       <p>
@@ -163,7 +164,6 @@
       </p>
     </section>
 
-    <!-- Section 3: Temperature and Humidity -->
     <section>
       <h2>Weather and Pollutants</h2>
       <h3>Temperature and Humidity</h3>
@@ -171,14 +171,12 @@
         Pollutant levels tend to increase with rising <strong>temperature</strong>. Conversely, lower <strong>humidity</strong> levels often correspond to reduced pollution. 
         However, <strong>temperature</strong> appears to have a stronger effect on AQI, likely due to enhanced chemical reactions in warmer air.
       </p>
-
       <div class="chart-column">
         <div id="temp_pol"></div>
         <div id="humid_pol"></div>
       </div>
     </section>
 
-    <!-- Section 4: Wind -->
     <section>
       <h3>Wind and Pollution</h3>
       <p>
@@ -189,7 +187,6 @@
       <div id="wind_pol"></div>
     </section>
 
-    <!-- Section 5: Pollutant Distribution -->
     <section>
       <h3>Pollutant Distribution</h3>
       <p>
@@ -200,7 +197,6 @@
       <div id="pie_pol"></div>
     </section>
 
-    <!-- Section 6: Dew Point -->
     <section>
       <h3>Dew Point and Pollutant Concentration</h3>
       <p>
@@ -211,7 +207,6 @@
       <div id="dew_pol"></div>
     </section>
 
-    <!-- Section 7: Conclusion -->
     <section class="conclusion-box">
       <h2>Conclusion</h2>
       <p>
